@@ -24,60 +24,12 @@
     .container {
       width: 100%;
       height: calc(100vh - 56px);
-      position: relative;
     }
 
     qlik-embed {
       display: block;
       width: 100%;
       height: 100%;
-    }
-
-    /* Covers only the Qlik logo area, inside the gray chat column */
-    .logo-cover {
-      position: absolute;
-      left: 50%;
-      top: 22%;
-      transform: translate(-50%, -50%);
-      width: 370px;
-      height: 240px;
-      background: #f5f5f5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1.2rem;
-      z-index: 5;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
-    }
-
-    .logo-wrap {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-    }
-
-    .logo-comax {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      font-weight: 800;
-      font-size: 2.6rem;
-      color: #6ab41a;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .logo-insight {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      font-weight: 300;
-      font-size: 2.6rem;
-      color: #555;
-    }
-
-    .logo-hint {
-      font-size: 0.85rem;
-      color: #bbb;
-      letter-spacing: 0.3px;
     }
   </style>
 
@@ -102,29 +54,11 @@
     </div>
   </header>
   <div class="container">
-    <div class="logo-cover" id="logoCover">
-      <div class="logo-wrap">
-        <span class="logo-comax">COMAX</span><span class="logo-insight">Insight</span>
-      </div>
-      <span class="logo-hint">הקלד שאלה בשדה למטה</span>
-    </div>
     <qlik-embed
       ui="ai/agentic-assistant"
       assistant-id="a6ea08b9-e511-408b-8741-16984fd1d5c2"
       appearance="qlik-light">
     </qlik-embed>
   </div>
-
-  <script>
-    const cover = document.getElementById('logoCover');
-
-    window.addEventListener('keydown', function handler(e) {
-      if (e.key === 'Enter') {
-        cover.style.opacity = '0';
-        setTimeout(() => cover.remove(), 400);
-        window.removeEventListener('keydown', handler);
-      }
-    });
-  </script>
 </body>
 </html>
