@@ -1,28 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="he">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>COMAX INSIGHT – ELI</title>
   <style>
-    html, body { margin: 0; padding: 0; height: 100%; }
-    qlik-embed { display: block; width: 100vw; height: 100vh; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; font-family: 'Segoe UI', Arial, sans-serif; }
+
+    header {
+      background: #2d7a2d;
+      color: white;
+      height: 56px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    header h1 { font-size: 1.1rem; font-weight: 600; }
+    header span { font-size: 0.85rem; opacity: 0.8; }
+
+    iframe {
+      display: block;
+      width: 100%;
+      height: calc(100vh - 56px);
+      border: none;
+    }
   </style>
-  <script
-    crossorigin="anonymous"
-    type="application/javascript"
-    src="https://cdn.jsdelivr.net/npm/@qlik/embed-web-components@1/dist/index.min.js"
-    data-host="https://qai.eu.qlikcloud.com"
-    data-client-id="019e3b177042dc8941b372a92325a982"
-    data-redirect-uri="https://eli-wolfson.github.io/comax-qlik-assistant/oauth-callback.html"
-    data-access-token-storage="session">
-  </script>
 </head>
 <body>
-  <qlik-embed
-    ui="ai/agentic-assistant"
-    assistant-id="a6ea08b9-e511-408b-8741-16984fd1d5c2"
-    appearance="qlik-light">
-  </qlik-embed>
+  <header>
+    <div>
+      <h1>COMAX INSIGHT</h1>
+      <span>ELI – מנוע שאלות ותשובות על הדאטה</span>
+    </div>
+  </header>
+  <iframe
+    src="https://qai.eu.qlikcloud.com/assistant/a6ea08b9-e511-408b-8741-16984fd1d5c2"
+    allowfullscreen>
+  </iframe>
 </body>
 </html>
