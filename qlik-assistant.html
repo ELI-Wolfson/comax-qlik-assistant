@@ -21,13 +21,27 @@
     header h1 { font-size: 1.1rem; font-weight: 600; }
     header span { font-size: 0.85rem; opacity: 0.8; }
 
-    iframe {
-      display: block;
+    .container {
       width: 100%;
       height: calc(100vh - 56px);
-      border: none;
+    }
+
+    qlik-embed {
+      display: block;
+      width: 100%;
+      height: 100%;
     }
   </style>
+
+  <script
+    crossorigin="anonymous"
+    type="application/javascript"
+    src="https://cdn.jsdelivr.net/npm/@qlik/embed-web-components@1/dist/index.min.js"
+    data-host="https://qai.eu.qlikcloud.com"
+    data-client-id="019e3b177042dc8941b372a92325a982"
+    data-redirect-uri="https://eli-wolfson.github.io/comax-qlik-assistant/oauth-callback.html"
+    data-access-token-storage="session">
+  </script>
 </head>
 <body>
   <header>
@@ -36,9 +50,12 @@
       <span>ELI – מנוע שאלות ותשובות על הדאטה</span>
     </div>
   </header>
-  <iframe
-    src="https://qai.eu.qlikcloud.com/assistant/a6ea08b9-e511-408b-8741-16984fd1d5c2"
-    allowfullscreen>
-  </iframe>
+  <div class="container">
+    <qlik-embed
+      ui="ai/agentic-assistant"
+      assistant-id="a6ea08b9-e511-408b-8741-16984fd1d5c2"
+      appearance="qlik-light">
+    </qlik-embed>
+  </div>
 </body>
 </html>
