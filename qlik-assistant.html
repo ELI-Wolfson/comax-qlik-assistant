@@ -33,22 +33,22 @@
       height: 100%;
     }
 
-    .welcome-overlay {
+    /* Covers only the logo area — bottom 80px stays open for the Qlik input bar */
+    .logo-cover {
       position: absolute;
-      inset: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 80px;
       background: #ffffff;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      z-index: 10;
-      transition: opacity 0.4s ease;
-    }
-
-    .welcome-overlay.fade-out {
-      opacity: 0;
+      gap: 2rem;
+      z-index: 5;
       pointer-events: none;
+      transition: opacity 0.4s ease;
     }
 
     .logo-wrap {
@@ -73,11 +73,10 @@
       color: #555;
     }
 
-    .welcome-hint {
-      margin-top: 2.5rem;
-      font-size: 0.9rem;
+    .logo-hint {
+      font-size: 0.85rem;
       color: #bbb;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.3px;
     }
   </style>
 
@@ -102,11 +101,11 @@
     </div>
   </header>
   <div class="container">
-    <div class="welcome-overlay" id="overlay">
+    <div class="logo-cover" id="logoCover">
       <div class="logo-wrap">
         <span class="logo-comax">COMAX</span><span class="logo-insight">Insight</span>
       </div>
-      <p class="welcome-hint">לחץ להתחלה</p>
+      <span class="logo-hint">הקלד שאלה בשדה למטה</span>
     </div>
     <qlik-embed
       ui="ai/agentic-assistant"
@@ -116,21 +115,14 @@
   </div>
 
   <script>
-    const overlay = document.getElementById('overlay');
-    const container = document.querySelector('.container');
+    const cover = document.getElementById('logoCover');
+    const IGNORE = new Set(['Tab','Shift','Control','Alt','Meta','CapsLock','Escape','ArrowUp','ArrowDown','ArrowLeft','ArrowRight']);
 
-    overlay.addEventListener('click', () => {
-      // Step 1: let clicks pass through but keep covering the Qlik logo
-      overlay.style.pointerEvents = 'none';
-      overlay.querySelector('.welcome-hint').textContent = '';
-    });
-
-    // Step 2: fade out only when user actually clicks on the Qlik input beneath
-    container.addEventListener('pointerdown', (e) => {
-      if (e.target !== overlay && !overlay.contains(e.target)) {
-        overlay.classList.add('fade-out');
-        setTimeout(() => overlay.remove(), 400);
-        container.removeEventListener('pointerdown', arguments.callee);
+    window.addEventListener('keydown', function handler(e) {
+      if (!IGNORE.has(e.key)) {
+        cover.style.opacity = '0';
+        setTimeout(() => cover.remove(), 400);
+        window.removeEventListener('keydown', handler);
       }
     });
   </script>
