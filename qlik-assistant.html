@@ -117,9 +117,21 @@
 
   <script>
     const overlay = document.getElementById('overlay');
+    const container = document.querySelector('.container');
+
     overlay.addEventListener('click', () => {
-      overlay.classList.add('fade-out');
-      setTimeout(() => overlay.remove(), 400);
+      // Step 1: let clicks pass through but keep covering the Qlik logo
+      overlay.style.pointerEvents = 'none';
+      overlay.querySelector('.welcome-hint').textContent = '';
+    });
+
+    // Step 2: fade out only when user actually clicks on the Qlik input beneath
+    container.addEventListener('pointerdown', (e) => {
+      if (e.target !== overlay && !overlay.contains(e.target)) {
+        overlay.classList.add('fade-out');
+        setTimeout(() => overlay.remove(), 400);
+        container.removeEventListener('pointerdown', arguments.callee);
+      }
     });
   </script>
 </body>
