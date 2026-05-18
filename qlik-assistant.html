@@ -116,10 +116,9 @@
 
   <script>
     const cover = document.getElementById('logoCover');
-    const IGNORE = new Set(['Tab','Shift','Control','Alt','Meta','CapsLock','Escape','ArrowUp','ArrowDown','ArrowLeft','ArrowRight']);
 
     window.addEventListener('keydown', function handler(e) {
-      if (!IGNORE.has(e.key)) {
+      if (e.key === 'Enter') {
         cover.style.opacity = '0';
         setTimeout(() => cover.remove(), 400);
         window.removeEventListener('keydown', handler);
